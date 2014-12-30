@@ -1,5 +1,6 @@
 force_color_prompt=yes 
 # ~/.bashrc: executed by bash(1) for non-login shells.
+<<<<<<< HEAD
 if [ "$SSH_TTY" ]
 then
 	date=`date`
@@ -17,6 +18,22 @@ then
 	echo
 	echo -e `cat ~/.todo`
 fi
+=======
+date=`date`
+load=`cat /proc/loadavg | awk '{print $1}'`
+root_usage=`df -h / | awk '/\// {print $(NF-1)}'`
+memory_usage=`free -m | awk '/Mem/ { printf("%3.1f%%", $3/$2*100) }'`
+swap_usage=`free -m | awk '/Swap/ { printf("%3.1f%%", $3/$2*100) }'`
+users=`users | wc -w`
+
+echo "System information as of: $date"
+echo
+printf "System load:\t%s\tMemory usage:\t%s\n" $load $memory_usage
+printf "Usage on /:\t%s\tSwap usage:\t%s\n" $root_usage $swap_usage
+printf "Local users:\t%s\n" $users
+echo
+echo -e `cat ~/.todo`
+>>>>>>> f14bc3344a3e2f931d3de6156fc0cfd2b4b7e739
 # Note: PS1 and umask are already set in /etc/profile. You should not
 # need this unless you want different defaults for root.
 # PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
