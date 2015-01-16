@@ -31,6 +31,8 @@ eval "`dircolors -b ~/.dir_colors`"
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+#ccat with color
+alias ccat='pygmentize'
 
 # LS cmd
 alias ls='ls --color=auto'
