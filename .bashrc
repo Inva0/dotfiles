@@ -104,3 +104,7 @@ function extract {
     fi
 fi
 }
+
+#MODIFY PATH
+export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
+export HISTCONTROL=ignoreboth:erasedups
