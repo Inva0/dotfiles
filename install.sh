@@ -25,8 +25,8 @@ if [ "$1" = "trace" ]; then
 	echo "Trace mode, no delete"
 else
 	shopt -s dotglob
-        echo "copying into your local home (/home/$USER)"
-        mv /tmp/dotfiles_install_$USER/* /home/$USER/
+        echo "copying into your local home ($HOME/$USER)"
+        mv /tmp/dotfiles_install_$USER/* $HOME/$USER/
 	rm /tmp/dotfiles_install_$USER/ -rf
 fi
 
