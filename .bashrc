@@ -27,6 +27,18 @@ fi
 # eval "`dircolors`"
 eval "`dircolors -b ~/.dir_colors`"
 
+
+# history control !
+export HISTCONTROL=ignoreboth:erasedups
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+
 # Some more alias to avoid making mistakes:
 alias rm='rm -i'
 alias cp='cp -i'
@@ -107,4 +119,3 @@ fi
 
 #MODIFY PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
-export HISTCONTROL=ignoreboth:erasedups
