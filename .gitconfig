@@ -1,0 +1,12 @@
+[color]
+	ui = auto
+[user]
+	email = edznux@gmail.com
+	name = Edznux
+[alias]
+    undo = git reset --soft HEAD~
+
+[core]
+        quotepath = false
+[push]
+	default = matching

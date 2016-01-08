@@ -16,10 +16,18 @@ then
 	echo -e `cat ~/.todo`
 fi
 
+#setting up git bash prompt
+if [ -f /etc/bash_completion ]; then
+. /etc/bash_completion
+fi
+
 # Note: PS1 and umask are already set in /etc/profile. You should not
 # need this unless you want different defaults for root.
 # PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
- PS1='\t \[\e[0;33m\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\$\[\e[m\] \[\e[0;37m\]'
+
+#PS1='\u@\h:\w$(__git_ps1) \$ '
+
+PS1='\t \[\e[0;33m\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]'
 # umask 022
 
 # You may uncomment the following lines if you want `ls' to be colorized:
