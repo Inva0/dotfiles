@@ -30,6 +30,10 @@ else
 	rm /tmp/dotfiles_install_$USER/ -rf
 fi
 
+if [ ! -f "~/.git-prompt.sh"]; then
+	curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+fi
+
 echo "now you should execute the next command for reloading your config"
 echo
 echo ". ~/.bashrc"
