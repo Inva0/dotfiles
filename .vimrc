@@ -2,7 +2,11 @@ set nocompatible
 set number
 set mouse=a
 
+" Set coloration
 syntax on
+
+" Set tab size to 4 char
+set tabstop=4
 
 " Better command-line completion
 set wildmenu
