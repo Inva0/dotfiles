@@ -2,6 +2,8 @@ set nocompatible
 set number
 set mouse=a
 
+" set auto save on lost focus
+:au FocusLost * :wa
 
 inoremap {<CR> {<CR>}
 " Set coloration
