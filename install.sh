@@ -30,7 +30,8 @@ else
 	rm /tmp/dotfiles_install_$USER/ -rf
 fi
 
-if [ ! -f "~/.git-prompt.sh" ]; then
+if [ !  -f "~/.git-prompt.sh" ]; then
+	echo "Downloading git-prompt"
 	curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 fi
 

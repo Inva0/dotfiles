@@ -2,6 +2,8 @@ set nocompatible
 set number
 set mouse=a
 
+
+inoremap {<CR> {<CR>}
 " Set coloration
 syntax on
 
@@ -10,7 +12,6 @@ set tabstop=4
 
 " Better command-line completion
 set wildmenu
-
 
 " Show partial commands in the last line of the screen
 set showcmd
