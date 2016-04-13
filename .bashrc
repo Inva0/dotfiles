@@ -92,6 +92,9 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias clean='sudo apt-get autoclean && sudo apt-get autoremove && sudo apt-get clean'
 
+#launch tmux in UTF8 mode (for putty)
+alias tmux='tmux -u'
+
 #Extracting function
 function extract {
  if [ -z "$1" ]; then
