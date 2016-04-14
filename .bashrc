@@ -63,8 +63,8 @@ alias ll='ls -la'
 #CD shortcut
 alias cd..='cd ..'
 alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
 alias .....='cd ../../../../'
 
 #clear shortcut
