@@ -56,9 +56,8 @@ alias ccat='pygmentize'
 
 # LS cmd
 alias ls='ls --color=auto'
-alias ..='cd ..'
-alias la='ls -a'
-alias ll='ls -la'
+alias la='ls -ah'
+alias ll='ls -lah'
 
 #CD shortcut
 alias cd..='cd ..'
