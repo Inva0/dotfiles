@@ -17,7 +17,7 @@ then
 fi
 
 #setting up git bash prompt
-if [ -f /etc/bash_completion ]; then
+if [ -f  ~/.git-prompt.sh ]; then
 . /etc/bash_completion
 fi
 
@@ -91,8 +91,11 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias clean='sudo apt-get autoclean && sudo apt-get autoremove && sudo apt-get clean'
 
+# Set coloration capabilities for term
+export TERM='xterm-256color'
+
 #launch tmux in UTF8 mode (for putty)
-alias tmux='tmux -u'
+alias tmux="TERM=screen-256color tmux -u"
 
 #Extracting function
 function extract {
