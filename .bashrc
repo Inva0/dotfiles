@@ -17,7 +17,7 @@ then
 fi
 
 #setting up git bash prompt
-if [ -f  ~/.git-prompt.sh ]; then
+if [ -f /etc/bash_completion ]; then
 . /etc/bash_completion
 fi
 
@@ -27,8 +27,19 @@ fi
 
 #PS1='\u@\h:\w$(__git_ps1) \$ '
 
+__git_ps1 () 
+{ 
+    local b="$(git symbolic-ref HEAD 2>/dev/null)";
+    if [ -n "$b" ]; then
+        printf " (%s)" "${b##refs/heads/}";
+    fi
+}
+
 PS1='\t \[\e[0;33m\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]'
 # umask 022
+
+# uses hub (https://hub.github.com to make git more github friendly
+eval "$(hub alias -s)"
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 # export LS_OPTIONS='--color=auto'
@@ -91,11 +102,13 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias clean='sudo apt-get autoclean && sudo apt-get autoremove && sudo apt-get clean'
 
-# Set coloration capabilities for term
-export TERM='xterm-256color'
-
 #launch tmux in UTF8 mode (for putty)
-alias tmux="TERM=screen-256color tmux -u"
+alias tmux='tmux -u'
+
+#Weather in terminal (useless but pretty)
+weather() {
+  curl "http://wttr.in/${1-}";
+}
 
 #Extracting function
 function extract {
@@ -107,21 +120,21 @@ function extract {
         # NAME=${1%.*}
         # mkdir $NAME && cd $NAME
         case $1 in
-          *.tar.bz2)   tar xvjf ../$1    ;;
-          *.tar.gz)    tar xvzf ../$1    ;;
-          *.tar.xz)    tar xvJf ../$1    ;;
-          *.lzma)      unlzma ../$1      ;;
-          *.bz2)       bunzip2 ../$1     ;;
-          *.rar)       unrar x -ad ../$1 ;;
-          *.gz)        gunzip ../$1      ;;
-          *.tar)       tar xvf ../$1     ;;
-          *.tbz2)      tar xvjf ../$1    ;;
-          *.tgz)       tar xvzf ../$1    ;;
-          *.zip)       unzip ../$1       ;;
-          *.Z)         uncompress ../$1  ;;
-          *.7z)        7z x ../$1        ;;
-          *.xz)        unxz ../$1        ;;
-          *.exe)       cabextract ../$1  ;;
+          *.tar.bz2)   tar xvjf ./$1    ;;
+          *.tar.gz)    tar xvzf ./$1    ;;
+          *.tar.xz)    tar xvJf ./$1    ;;
+          *.lzma)      unlzma ./$1      ;;
+          *.bz2)       bunzip2 ./$1     ;;
+          *.rar)       unrar x -ad ./$1 ;;
+          *.gz)        gunzip ./$1      ;;
+          *.tar)       tar xvf ./$1     ;;
+          *.tbz2)      tar xvjf ./$1    ;;
+          *.tgz)       tar xvzf ./$1    ;;
+          *.zip)       unzip ./$1       ;;
+          *.Z)         uncompress ./$1  ;;
+          *.7z)        7z x ./$1        ;;
+          *.xz)        unxz ./$1        ;;
+          *.exe)       cabextract ./$1  ;;
           *)           echo "extract: '$1' - unknown archive method" ;;
         esac
     else
@@ -132,6 +145,3 @@ fi
 
 #MODIFY PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
-
-#SET ENV VAR
-export EDITOR='vim'

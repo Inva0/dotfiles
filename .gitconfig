@@ -1,8 +1,8 @@
 [color]
 	ui = auto
 [user]
-	email = edznux@gmail.com
-	name = Edznux
+	email = gaetan@fauge.re
+	name = Faugère Gaëtan
 [alias]
     undo = git reset --soft HEAD~
 
@@ -10,3 +10,5 @@
         quotepath = false
 [push]
 	default = matching
+[credential]
+	helper = cache --timeout=7200
