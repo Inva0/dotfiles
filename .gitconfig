@@ -4,7 +4,10 @@
 	email = edznux@gmail.com
 	name = Edznux
 [alias]
-    undo = git reset --soft HEAD~
+    undo = reset --soft HEAD~
+    redo = commit -a -c ORIG_HEAD
+    ls = ls-files
+    s = status
 
 [core]
         quotepath = false
