@@ -77,8 +77,13 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
 
-alias cds='cd /var/www/'
-alias cdd='cd /usr/local/batch/'
+#other cd shortcuts, but better
+cds() {
+	cd /var/www/$1
+}
+cdd() {
+	cd /usr/local/batch/$1
+}
 
 #clear shortcut
 alias c='clear'
