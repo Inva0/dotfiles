@@ -77,6 +77,9 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
 
+alias cds='cd /var/www/'
+alias cdd='cd /usr/local/batch/'
+
 #clear shortcut
 alias c='clear'
 
