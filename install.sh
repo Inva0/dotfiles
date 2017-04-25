@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 echo "installing dotfiles for user : $USER"
 
 read -p "Continue? [Y/n]" -n 1 -r
