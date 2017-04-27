@@ -77,6 +77,9 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
 
+#Changing du to a default comportment that I like btter
+alias du='du -sh'
+
 #other cd shortcuts, but better
 cds() {
 	cd /var/www/$1
