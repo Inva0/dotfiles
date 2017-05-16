@@ -12,8 +12,13 @@ then
 	printf "System load:\t%s\tMemory usage:\t%s\n" $load $memory_usage
 	printf "Usage on /:\t%s\tSwap usage:\t%s\n" $root_usage $swap_usage
 	printf "Local users:\t%s\n" $users
+	if [ $(cat .todo | head -c1 | wc -c) -ne 0 ]; then
+		echo
+		cat .todo
+	fi
 	echo
-	echo -e `cat ~/.todo`
+	echo "Available tmux sessions:"
+	tmux ls
 fi
 
 #setting up git bash prompt
@@ -77,16 +82,8 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
 
-#Changing du to a default comportment that I like btter
+#Changing du to have a default comportement that I like better
 alias du='du -sh'
-
-#other cd shortcuts, but better
-cds() {
-	cd /var/www/$1
-}
-cdd() {
-	cd /usr/local/batch/$1
-}
 
 #clear shortcut
 alias c='clear'
@@ -153,6 +150,8 @@ function extract {
     fi
 fi
 }
+
+export EDITOR='vim'
 
 #MODIFY PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
