@@ -1,42 +1,46 @@
-echo "installing dotfiles for user : $USER"
+echo "Installing dotfiles for user : $USER"
 
-read -p "Continue? [Y/n]" -n 1 -r
-echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    echo "Cancelling"
-    exit 1
+read -r -p "Replaced files will be backed up. Continue? [Y/n] " response
+response=${response,,} # tolower
+echo
+if [[ ! $response =~ ^(yes|y| ) ]] & [ ! -z $response ]; then
+	echo "Cancelling"
+	exit 1
 fi
 
-#init
-echo "Initialisation"
-shopt -s extglob
+#Creating back up dir
+bakdir=".dotfiles_bak_$(date +%Y-%m-%d)"
+mkdir ~/$bakdir
 
-echo "Suppression du dossier /tmp/dotfiles_install_$USER"
-rm /tmp/dotfiles_install_$USER -rf
-echo "Creation du dossier temp"
-mkdir /tmp/dotfiles_install_$USER
+bakused=false;
 
-#copy files
-echo "copy into tmp folder"
-cp ./.*!(.git|*.md|LICENSE) /tmp/dotfiles_install_$USER
+#going through files, backing up if necessary
+for f in $(ls -a | grep -P '^\.(?!git$)(?!\.).+$')
+do
+	if [ -f ~/$f ]; then
+		cp ~/$f ~/$bakdir/$f
+		bakused=true;
+	fi
+	ln -fs $(pwd)/$f ~/$f
+	
+done
 
-if [ "$1" = "trace" ]; then
-	echo "Trace mode, no delete"
+if [ $bakused = false ]; then
+	rmdir ~/$bakdir
+	echo "No files were overwritten"
 else
-	shopt -s dotglob
-        echo "copying into your local home ($HOME)"
-        mv /tmp/dotfiles_install_$USER/* $HOME
-	rm /tmp/dotfiles_install_$USER/ -rf
+	echo "Backed up files available in ~/$bakdir"
 fi
 
-if [ !  -f "~/.git-prompt.sh" ]; then
-	echo "Downloading git-prompt"
-	curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+echo
+
+if [ ! -f ~/.git-prompt.sh ]; then
+    echo "Downloading git-prompt"
+    curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+	echo
 fi
 
-echo "now you should execute the next command for reloading your config"
+echo "You can now load your new config by sourcing the bashfile:"
 echo
 echo ". ~/.bashrc"
 echo
-
