@@ -14,7 +14,7 @@ then
 	printf "Local users:\t%s\n" $users
 	if [ $(cat .todo | head -c1 | wc -c) -ne 0 ]; then
 		echo
-		cat .todo
+		echo -e $(cat .todo)
 	fi
 	echo
 	echo "Available tmux sessions:"
