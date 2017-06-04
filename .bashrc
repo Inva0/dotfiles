@@ -155,3 +155,8 @@ export EDITOR='vim'
 
 #MODIFY PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
+#path variables for go
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=~/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
