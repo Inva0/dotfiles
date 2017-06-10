@@ -26,8 +26,16 @@ fi
 # PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
 
 #PS1='\u@\h:\w$(__git_ps1) \$ '
+if id -u | grep -qw "0"; then
+	PS1_COLOR="31m" # Redish
+elif id -nG "$USER" | grep -qw "adm"; then
+	PS1_COLOR="33m" # Yellowish
+else
+	PS1_COLOR="36m" # Blueish
+fi
 
-PS1='\t \[\e[0;33m\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]'
+PS1="\t \[\e[$PS1_COLOR\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
+
 # umask 022
 
 # You may uncomment the following lines if you want `ls' to be colorized:
