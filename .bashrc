@@ -16,6 +16,9 @@ then
 	echo -e `cat ~/.todo`
 fi
 
+# docker alias
+source ~/.dockerfunc
+
 #setting up git bash prompt
 if [ -f  ~/.git-prompt.sh ]; then
 . /etc/bash_completion
