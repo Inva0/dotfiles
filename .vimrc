@@ -10,6 +10,7 @@ inoremap {<CR> {<CR>}
 syntax on
 
 " Set tab size to 4 char
+set shiftwidth=4
 set tabstop=4
 
 " Better command-line completion
@@ -60,3 +61,5 @@ set mouse=a
 " "press <Enter> to continue"
 set cmdheight=2
 
+" Change default theme
+colorscheme delek
