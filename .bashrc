@@ -37,7 +37,7 @@ else
 	PS1_COLOR="36m" # Blueish
 fi
 
-PS1="\t \[\e[$PS1_COLOR\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
+PS1="\t \[\e[$PS1_COLOR\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
 
 # umask 022
 
