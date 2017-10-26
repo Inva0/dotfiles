@@ -63,3 +63,6 @@ set cmdheight=2
 
 " Change default theme
 colorscheme delek
+
+" set wrap cursor at the end of line for arrow key
+set whichwrap+=<,>,h,l,[,]
