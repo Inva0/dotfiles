@@ -1,6 +1,6 @@
 set nocompatible
 set number
-set mouse=a
+set mouse=""
 
 " set auto save on lost focus
 :au FocusLost * :wa
