@@ -102,6 +102,8 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias clean='sudo apt-get autoclean && sudo apt-get autoremove && sudo apt-get clean'
 
+alias lisbeth="ssh edznux@edznux.fr"
+
 # Set coloration capabilities for term
 export TERM='xterm-256color'
 
