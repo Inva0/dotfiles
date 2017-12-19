@@ -66,7 +66,12 @@ alias mv='mv -i'
 alias ccat='pygmentize'
 
 # LS cmd
-alias ls='ls --color=auto'
+if [ -x "$(command -v exa)" ]; then
+    alias ls='exa --color=auto'
+else
+    alias ls='ls --color=auto'
+fi
+
 alias la='ls -ah'
 alias ll='ls -lah'
 
