@@ -138,10 +138,22 @@ mode "resize" {
         bindsym m resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 5 ppt
+        bindsym Down resize grow height 10 px or 5 ppt
+        bindsym Up resize shrink height 10 px or 5 ppt
+        bindsym Right resize grow width 10 px or 5 ppt
+
+        # Precise bind (use ctrl to move pixel by pixel)
+        bindsym Ctrl+Left resize shrink width 1 px or 1 ppt
+        bindsym Ctrl+Down resize grow height 1 px or 1 ppt
+        bindsym Ctrl+Up resize shrink height 1 px or 1 ppt
+        bindsym Ctrl+Right resize grow width 1 px or 1 ppt
+
+        # Fast resize : use shift to resize by big steps
+        bindsym Shift+Left resize shrink width 20 px or 20 ppt
+        bindsym Shift+Down resize grow height 20 px or 20 ppt
+        bindsym Shift+Up resize shrink height 20 px or 20 ppt
+        bindsym Shift+Right resize grow width 20 px or 20 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -153,10 +165,10 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+
 bar {
         font pango: Source Sans Pro, 12
-        status_command i3status
-        height 25
+        status_command i3blocks
         position top
 }
 
@@ -166,33 +178,51 @@ bar {
 
 # bind firefox to alt+shift+2
 bindsym Mod4+2 exec /usr/bin/firefox
+bindsym $mod+Ctrl+8 exec "i3-msg 'workspace 8; exec /usr/bin/firefox -new-window music.google.com'"
 bindsym Mod4+3 exec /usr/bin/subl
+bindsym Mod4+4 exec /usr/bin/code
 
 # bind lock to win+l
 bindsym Mod4+l exec dm-tool lock
 bindsym XF86MonBrightnessUp exec light -A 1
 bindsym XF86MonBrightnessDown exec light -U 1
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# increase/decrease keyboard brightness
+bindsym XF86KbdBrightnessUp exec kbacklight up
+bindsym XF86KbdBrightnessDown exec kbacklight down 
 
 bindsym $mod+Ctrl+9 exec "i3-msg 'workspace 9; exec /usr/bin/slack; exec /snap/bin/discord'"
-# bind tap to clic
+
+bindsym $mod+t floating toggle
+# enable tap to clic
 exec xinput set-prop 12 280 1
 
 # reverse scroll
 exec xinput set-prop 12 290 1
 
+# slower mouse movement
+exec xinput set-prop 12 288 -0.3
+
 # set background
 exec feh --bg-center ~/.config/wallpaper4.jpg
+
+# add gestures
+exec libinput-gestures-setup start
 
 #set transparency
 exec /usr/bin/compton
 
 
-new_window pixel 2
+new_window pixel 1
 
 smart_gaps on
 
-gaps outer 10
-gaps inner 10
+gaps outer 5
+gaps inner 5
 
 
 
