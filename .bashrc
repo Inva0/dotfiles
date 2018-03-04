@@ -1,7 +1,7 @@
 cd
 
 date=$(date)
-load=$(awk '{print $1}' < proc/loadavg)
+load=$(awk '{print $1}' < /proc/loadavg)
 root_usage=$(df -h / | awk '/\// {print $(NF-1)}')
 memory_usage=$(free -m | awk '/Mem/ { printf("%3.1f%%", $3/$2*100) }')
 swap_usage=$(free -m | awk '/Swap/ { printf("%3.1f%%", $3/$2*100) }')
@@ -19,15 +19,18 @@ if [ $(cat .todo | head -c1 | wc -c) -ne 0 ]; then
 		echo -e $(cat .todo)
 fi
 echo
+if [ $tmux_state -eq 0 ]; then
+	echo "Available tmux sessions:"
+	echo "$tmux_sessions"
+else
+	echo "tmux is not running"
+fi
+echo
 
 #setting up git bash prompt
 if [ -f /etc/bash_completion ]; then
 . /etc/bash_completion
 fi
-
-# Note: PS1 and umask are already set in /etc/profile. You should not
-# need this unless you want different defaults for root.
-# PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
 
 #PS1='\u@\h:\w$(__git_ps1) \$ '
 
@@ -63,8 +66,7 @@ case $(hostname) in
 	;;
 esac
 
-PS1="\t \[\e[38;5;253m\]\u\[\e[38;5;245m\]@\e[""$machineColor""m\h\[\e[m\]:\[\e[00;36m\][\w]$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
-# umask 022
+PS1="\t \[\e[38;5;253m\]\u\[\e[38;5;245m\]@\e[""$machineColor""m\h\[\e[m\]:\[\e[00;36m\][\w]\[\e[38;5;245m\]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
 
 # uses hub (https://hub.github.com to make git more github friendly
 eval "$(hub alias -s)"
