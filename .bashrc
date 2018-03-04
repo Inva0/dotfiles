@@ -62,7 +62,7 @@ case $(hostname) in
 	machineColor="0;34;40"
 	;;
 (*)
-	machineColor="0;37;40"
+	machineColor="1;33"
 	;;
 esac
 
