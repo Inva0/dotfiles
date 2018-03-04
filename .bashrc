@@ -1,25 +1,24 @@
-if [ "$SSH_TTY" ]
-then
-	date=`date`
-	load=`cat /proc/loadavg | awk '{print $1}'`
-	root_usage=`df -h / | awk '/\// {print $(NF-1)}'`
-	memory_usage=`free -m | awk '/Mem/ { printf("%3.1f%%", $3/$2*100) }'`
-	swap_usage=`free -m | awk '/Swap/ { printf("%3.1f%%", $3/$2*100) }'`
-	users=`users | wc -w`
+cd
 
-	echo "System information as of: $date"
-	echo
-	printf "System load:\t%s\tMemory usage:\t%s\n" $load $memory_usage
-	printf "Usage on /:\t%s\tSwap usage:\t%s\n" $root_usage $swap_usage
-	printf "Local users:\t%s\n" $users
-	if [ $(cat .todo | head -c1 | wc -c) -ne 0 ]; then
+date=$(date)
+load=$(awk '{print $1}' < proc/loadavg)
+root_usage=$(df -h / | awk '/\// {print $(NF-1)}')
+memory_usage=$(free -m | awk '/Mem/ { printf("%3.1f%%", $3/$2*100) }')
+swap_usage=$(free -m | awk '/Swap/ { printf("%3.1f%%", $3/$2*100) }')
+users=$(users | wc -w)
+tmux_sessions=$(tmux ls 2>/dev/null)
+tmux_state=$?
+
+echo "System information as of: $date"
+echo
+printf "System load:\t%s\tMemory usage:\t%s\n" $load $memory_usage
+printf "Usage on /:\t%s\tSwap usage:\t%s\n" $root_usage $swap_usage
+printf "Local users:\t%s\n" $users
+if [ $(cat .todo | head -c1 | wc -c) -ne 0 ]; then
 		echo
 		echo -e $(cat .todo)
-	fi
-	echo
-	echo "Available tmux sessions:"
-	tmux ls
 fi
+echo
 
 #setting up git bash prompt
 if [ -f /etc/bash_completion ]; then
@@ -40,7 +39,31 @@ __git_ps1 ()
     fi
 }
 
-PS1='\t \[\e[0;33m\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]'
+case $(hostname) in
+("inva")
+	machineColor="0;36;40"
+	;;
+("coffeemaker")
+	machineColor="0;33;40"
+	;;
+("Bebe")
+	machineColor="0;35;40"
+	;;
+("tor-relay")
+	machineColor="0;31;40"
+	;;
+("common")
+	machineColor="1;31;40"
+	;;
+("pidoor")
+	machineColor="0;34;40"
+	;;
+(*)
+	machineColor="0;37;40"
+	;;
+esac
+
+PS1="\t \[\e[38;5;253m\]\u\[\e[38;5;245m\]@\e[""$machineColor""m\h\[\e[m\]:\[\e[00;36m\][\w]$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
 # umask 022
 
 # uses hub (https://hub.github.com to make git more github friendly
@@ -74,6 +97,7 @@ alias ccat='pygmentize'
 alias ls='ls --color=auto'
 alias la='ls -ah'
 alias ll='ls -lah'
+alias l='ls'
 
 #CD shortcut
 alias cd..='cd ..'
@@ -112,6 +136,9 @@ alias clean='sudo apt-get autoclean && sudo apt-get autoremove && sudo apt-get c
 
 #launch tmux in UTF8 mode (for putty)
 alias tmux='tmux -u'
+
+#using ip with colors
+alias ip='ip -c'
 
 #Weather in terminal (useless but pretty)
 weather() {
