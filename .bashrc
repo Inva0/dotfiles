@@ -74,7 +74,7 @@ __git_ps1 ()
         ;;
     esac
     if [ -n "$b" ]; then
-        printf " \e[""$bcolor""m(%s)\e[m" "$bname";
+        printf " \001\e[""$bcolor""m\002(%s)\001\e[m\002" "$bname";
     fi
 }
 
