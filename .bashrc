@@ -16,12 +16,20 @@ then
 	echo -e `cat ~/.todo`
 fi
 
+# random color for each host
+
+if [ ! -f ~/.host_color ]; then
+	echo "Host color not found, created : "
+	echo -e "\e[3$(( $RANDOM * 6 / 32767 + 1 ))m">~/.host_color
+	echo -e "$(cat ~/.host_color) This color !\033[0m"
+fi
+
 # docker alias
 source ~/.dockerfunc
 
 #setting up git bash prompt
-if [ -f  ~/.git-prompt.sh ]; then
-. /etc/bash_completion
+if [ -f  /etc/bash_completion ]; then
+	. /etc/bash_completion
 fi
 
 # Note: PS1 and umask are already set in /etc/profile. You should not
@@ -37,7 +45,7 @@ else
 	PS1_COLOR="36m" # Blueish
 fi
 
-PS1="\t \[\e[$PS1_COLOR\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
+PS1="\t \[\e[$PS1_COLOR\]\u@$(cat .host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]\033[0m"
 
 # umask 022
 
@@ -161,3 +169,6 @@ export EDITOR='vim'
 #PATH FOR GOLANG
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+# added by travis gem
+[ -f /home/edznux/.travis/travis.sh ] && source /home/edznux/.travis/travis.sh
