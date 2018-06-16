@@ -44,8 +44,19 @@ elif id -nG "$USER" | grep -qw "adm"; then
 else
 	PS1_COLOR="36m" # Blueish
 fi
+PS1="\t " # prompt time
+PS1="$PS1\[\e[$PS1_COLOR\]"        # user color
+PS1="$PS1\u"                       # user name
+PS1="$PS1@"                        # add @ between user name and host
+PS1="$PS1\[$(cat ~/.host_color)\]" # set color with predefined colors (see above)
+PS1="$PS1\h"                       # host name
+PS1="$PS1\[\e[00;36m\]"            # blue color for directory
+PS1="$PS1[\w]"                     # working directory, inside '[' and ']'
+PS1="$PS1$(__git_ps1)"             # add git info
+PS1="$PS1\[\e[37;00m\]"            # reset color
+PS1="$PS1\$ "                  # add $ and a space at the end
 
-PS1="\t \[\e[$PS1_COLOR\]\u@$(cat ~/.host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]\033[0m"
+#PS1="\t \[\e[$PS1_COLOR\]\u@$(cat ~/.host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
 
 # umask 022
 
@@ -165,6 +176,20 @@ function git-work(){
 	git log --shortstat --author $EMAIL | \
 	grep -E "files? changed" | \
 	awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "\nfile :", files, "\ninserted : ", inserted, "deleted", deleted}'Ressource
+}
+
+# Add color to man pages
+# thanks to https://github.com/jessfraz/dotfiles/blob/master/.functions
+man() {
+	env \
+		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_me="$(printf '\e[0m')" \
+		LESS_TERMCAP_se="$(printf '\e[0m')" \
+		LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
+		LESS_TERMCAP_ue="$(printf '\e[0m')" \
+		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
+		man "$@"
 }
 
 #MODIFY PATH
