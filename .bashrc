@@ -45,7 +45,7 @@ else
 	PS1_COLOR="36m" # Blueish
 fi
 
-PS1="\t \[\e[$PS1_COLOR\]\u@$(cat .host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]\[\e[0m\]"
+PS1="\t \[\e[$PS1_COLOR\]\u@$(cat ~/.host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]\033[0m"
 
 # umask 022
 
