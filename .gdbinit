@@ -3997,3 +3997,4 @@ end
 #   Version 2
 #     Radix bugfix by elaine
 
+source /home/edznux/install/pwndbg/gdbinit.py

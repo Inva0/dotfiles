@@ -45,7 +45,7 @@ else
 	PS1_COLOR="36m" # Blueish
 fi
 
-PS1="\t \[\e[$PS1_COLOR\]\u@$(cat .host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]\033[0m"
+PS1="\t \[\e[$PS1_COLOR\]\u@$(cat .host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]\[\e[0m\]"
 
 # umask 022
 
@@ -160,6 +160,13 @@ function mkcd(){
     mkdir -p -- "$1" && cd -P -- "$1"
 }
 
+function git-work(){
+	EMAIL=$1
+	git log --shortstat --author $EMAIL | \
+	grep -E "files? changed" | \
+	awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "\nfile :", files, "\ninserted : ", inserted, "deleted", deleted}'Ressource
+}
+
 #MODIFY PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
 
@@ -170,5 +177,13 @@ export EDITOR='vim'
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
+# source tools
+source ~/install/z/z.sh
+
 # added by travis gem
 [ -f /home/edznux/.travis/travis.sh ] && source /home/edznux/.travis/travis.sh
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+export GPG_TTY=$(tty)

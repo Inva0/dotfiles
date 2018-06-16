@@ -1,9 +1,11 @@
+#!/bin/bash
 DOTFILES_DIR="$HOME/dotfiles"
+INSTALL_DIR="$HOME/install"
 
 echo "installing dotfiles for user : $USER"
 
 read -p "Continue? [Y/n]" -n 1 -r
-echo    # (optional) move to a new line
+echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
     echo "Cancelling"
@@ -18,8 +20,9 @@ ln -sf $DOTFILES_DIR/.dir_colors ~/.dir_colors
 ln -sf $DOTFILES_DIR/.bashrc ~/.bashrc
 ln -sf $DOTFILES_DIR/.dockerfunc ~/.dockerfunc
 
+./install-tools.sh
 
-echo "now you should execute the next command for reloading your config"
+echo "now you should execute the next command to reload your config"
 echo
 echo ". ~/.bashrc"
 echo
