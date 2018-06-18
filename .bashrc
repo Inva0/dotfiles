@@ -217,4 +217,3 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
 export GPG_TTY=$(tty)
->>>>>>> 9b735579e2b1ffd1f9634114b0b0deacbab657ac
