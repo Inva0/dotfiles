@@ -20,6 +20,7 @@ ln -sf $DOTFILES_DIR/.dir_colors ~/.dir_colors
 ln -sf $DOTFILES_DIR/.bashrc ~/.bashrc
 ln -sf $DOTFILES_DIR/.dockerfunc ~/.dockerfunc
 ln -sf $DOTFILES_DIR/.i3blocks.conf ~/.i3blocks.conf
+ln -sf $DOTFILES_DIR/.config ~/.config
 
 ./install-tools.sh
 
