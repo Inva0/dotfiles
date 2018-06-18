@@ -152,6 +152,8 @@ function mkcd(){
     mkdir -p -- "$1" && cd -P -- "$1"
 }
 
+. ~/install/z/z.sh
+
 #MODIFY PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
 
@@ -161,3 +163,8 @@ export EDITOR='vim'
 #PATH FOR GOLANG
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+#virtualenv....
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh

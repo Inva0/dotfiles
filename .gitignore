@@ -1,2 +1,5 @@
 *.swp
+*.bak
 .config/Slack/*
+.config/radare2/history
+.config/libinput-gestures.conf.bak
