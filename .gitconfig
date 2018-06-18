@@ -3,6 +3,7 @@
 [user]
 	email = edznux@gmail.com
 	name = Edznux
+	signingkey = 12E2546C25DD9C3D
 [alias]
     undo = reset --soft HEAD~
     redo = commit -a -c ORIG_HEAD

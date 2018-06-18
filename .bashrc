@@ -16,12 +16,20 @@ then
 	echo -e `cat ~/.todo`
 fi
 
+# random color for each host
+
+if [ ! -f ~/.host_color ]; then
+	echo "Host color not found, created : "
+	echo -e "\e[3$(( $RANDOM * 6 / 32767 + 1 ))m">~/.host_color
+	echo -e "$(cat ~/.host_color) This color !\033[0m"
+fi
+
 # docker alias
 source ~/.dockerfunc
 
 #setting up git bash prompt
-if [ -f  ~/.git-prompt.sh ]; then
-. /etc/bash_completion
+if [ -f  /etc/bash_completion ]; then
+	. /etc/bash_completion
 fi
 
 # Note: PS1 and umask are already set in /etc/profile. You should not
@@ -36,8 +44,19 @@ elif id -nG "$USER" | grep -qw "adm"; then
 else
 	PS1_COLOR="36m" # Blueish
 fi
+PS1="\t " # prompt time
+PS1="$PS1\[\e[$PS1_COLOR\]"        # user color
+PS1="$PS1\u"                       # user name
+PS1="$PS1@"                        # add @ between user name and host
+PS1="$PS1\[$(cat ~/.host_color)\]" # set color with predefined colors (see above)
+PS1="$PS1\h"                       # host name
+PS1="$PS1\[\e[00;36m\]"            # blue color for directory
+PS1="$PS1[\w]"                     # working directory, inside '[' and ']'
+PS1="$PS1\$(__git_ps1)"             # add git info
+PS1="$PS1\[\e[37;00m\]"            # reset color
+PS1="$PS1\$ "                  # add $ and a space at the end
 
-PS1="\t \[\e[$PS1_COLOR\]\u@\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
+#PS1="\t \[\e[$PS1_COLOR\]\u@$(cat ~/.host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
 
 # umask 022
 
@@ -152,7 +171,26 @@ function mkcd(){
     mkdir -p -- "$1" && cd -P -- "$1"
 }
 
-. ~/install/z/z.sh
+function git-work(){
+	EMAIL=$1
+	git log --shortstat --author $EMAIL | \
+	grep -E "files? changed" | \
+	awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "\nfile :", files, "\ninserted : ", inserted, "deleted", deleted}'Ressource
+}
+
+# Add color to man pages
+# thanks to https://github.com/jessfraz/dotfiles/blob/master/.functions
+man() {
+	env \
+		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_me="$(printf '\e[0m')" \
+		LESS_TERMCAP_se="$(printf '\e[0m')" \
+		LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
+		LESS_TERMCAP_ue="$(printf '\e[0m')" \
+		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
+		man "$@"
+}
 
 #MODIFY PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
@@ -168,3 +206,15 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
+
+# source tools
+source ~/install/z/z.sh
+
+# added by travis gem
+[ -f /home/edznux/.travis/travis.sh ] && source /home/edznux/.travis/travis.sh
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+export GPG_TTY=$(tty)
+>>>>>>> 9b735579e2b1ffd1f9634114b0b0deacbab657ac
