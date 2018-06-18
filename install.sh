@@ -19,6 +19,7 @@ ln -sf $DOTFILES_DIR/.gdbinit ~/.gdbinit
 ln -sf $DOTFILES_DIR/.dir_colors ~/.dir_colors
 ln -sf $DOTFILES_DIR/.bashrc ~/.bashrc
 ln -sf $DOTFILES_DIR/.dockerfunc ~/.dockerfunc
+ln -sf $DOTFILES_DIR/.i3blocks.conf ~/.i3blocks.conf
 
 ./install-tools.sh
 
