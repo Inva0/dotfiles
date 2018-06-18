@@ -216,14 +216,7 @@ exec libinput-gestures-setup start
 #set transparency
 exec /usr/bin/compton
 
-
 new_window pixel 1
-
-smart_gaps on
-
-gaps outer 5
-gaps inner 5
-
 
 
 
