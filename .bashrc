@@ -44,6 +44,7 @@ elif id -nG "$USER" | grep -qw "adm"; then
 else
 	PS1_COLOR="36m" # Blueish
 fi
+
 PS1="\t " # prompt time
 PS1="$PS1\[\e[$PS1_COLOR\]"        # user color
 PS1="$PS1\u"                       # user name
@@ -56,9 +57,8 @@ PS1="$PS1\$(__git_ps1)"             # add git info
 PS1="$PS1\[\e[37;00m\]"            # reset color
 PS1="$PS1\$ "                  # add $ and a space at the end
 
-#PS1="\t \[\e[$PS1_COLOR\]\u@$(cat ~/.host_color)\h\[\e[m\]:\[\e[00;36m\][\w]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
-
-# umask 022
+# remove r/x from new files.
+umask 077
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 # export LS_OPTIONS='--color=auto'
@@ -202,11 +202,6 @@ export EDITOR='vim'
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-#virtualenv....
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
-
 # source tools
 source ~/install/z/z.sh
 
@@ -215,5 +210,5 @@ source ~/install/z/z.sh
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
+source ~/.local/bin/virtualenvwrapper.sh
 export GPG_TTY=$(tty)
