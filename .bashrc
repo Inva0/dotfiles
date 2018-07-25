@@ -192,18 +192,21 @@ man() {
 		man "$@"
 }
 
-#MODIFY PATH
+# MODIFY PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
 
-#SET ENV VAR
+# SET ENV VAR
 export EDITOR='vim'
 
-#PATH FOR GOLANG
+# PATH for Golang
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
+# PATH for Rust
+export PATH=$PATH:$HOME/.cargo/bin/
+
 # source tools
-source ~/install/z/z.sh
+source /usr/local/bin/z/z.sh
 
 # added by travis gem
 [ -f /home/edznux/.travis/travis.sh ] && source /home/edznux/.travis/travis.sh
@@ -211,4 +214,5 @@ source ~/install/z/z.sh
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source ~/.local/bin/virtualenvwrapper.sh
+
 export GPG_TTY=$(tty)
