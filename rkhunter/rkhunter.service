@@ -1,0 +1,9 @@
+[Unit]
+Description=rkhunter launcher
+
+[Service]
+Type=oneshot
+# --cronjob : display without interactive, no colors, ...
+# --report-warning-only : remove "good" thing
+ExecStartPre=/usr/bin/rkhunter --update
+ExecStart=/usr/bin/rkhunter --cronjob --report-warnings-only
