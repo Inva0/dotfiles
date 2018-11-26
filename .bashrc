@@ -59,7 +59,7 @@ PS1="$PS1\[\e[37;00m\]"            # reset color
 PS1="$PS1\$ "                  # add $ and a space at the end
 
 # remove r/x from new files.
-umask 077
+umask 027
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 # export LS_OPTIONS='--color=auto'
