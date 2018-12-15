@@ -221,3 +221,8 @@ new_window pixel 1
 
 exec_always "xrandr --output DVI-I-1 --auto --primary --right-of HDMI-0"
 exec_always "start-pulseaudio-x11"
+
+# Add custom dmenu snippet (snippy scripts)
+bindsym $mod+b exec ~/dotfiles/scripts/snippy.sh
+bindsym $mod+n exec ~/dotfiles/scripts/snippy_1line.sh
+
