@@ -129,7 +129,7 @@ alias clean='sudo apt-get autoclean && sudo apt-get autoremove && sudo apt-get c
 
 # ssh alias
 alias lisbeth="ssh edznux@edznux.fr"
-alias lisbeth="ssh pi@raspberrypi.home"
+alias raspi="ssh pi@raspberrypi.home"
 
 # trello-cli alias
 alias todo="trello show-cards -b general -l TODO"
