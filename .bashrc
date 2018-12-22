@@ -57,8 +57,7 @@ PS1="$PS1\$(__git_ps1)"             # add git info
 PS1="$PS1\[\e[37;00m\]"            # reset color
 PS1="$PS1\$ "                  # add $ and a space at the end
 
-# remove r/x from new files.
-umask 077
+umask 022
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 # export LS_OPTIONS='--color=auto'
