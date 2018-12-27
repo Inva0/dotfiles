@@ -1,5 +1,11 @@
 *.swp
 *.bak
-.config/Slack/*
-.config/radare2/history
-.config/libinput-gestures.conf.bak
+.config/*
+!.config/terminator/config
+!.config/neofetch/config
+!.config/compton.conf
+!.config/edznuxlastconfig.cfg
+!.config/wallapaper4.jpg
+!.config/mimeapps.list
+!.config/Code/User/settings.json
+!.config/snippy

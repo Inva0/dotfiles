@@ -1,0 +1,8 @@
+[Added Associations]
+image/png=krita_png.desktop;gimp.desktop;
+video/mp4=vlc.desktop;
+application/vsix=code.desktop;
+video/x-matroska=vlc.desktop;
+
+[Default Applications]
+x-scheme-handler/vscode=code-url-handler.desktop

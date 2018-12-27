@@ -1,3 +1,6 @@
+# misc PATH
+export PATH=$PATH:$HOME/install/trello-cli/bin
+
 if [ "$SSH_TTY" ]
 then
 	date=`date`
@@ -13,7 +16,7 @@ then
 	printf "Usage on /:\t%s\tSwap usage:\t%s\n" $root_usage $swap_usage
 	printf "Local users:\t%s\n" $users
 	echo
-	echo -e `cat ~/.todo`
+	trello show-cards -b general -l "TODO dev"
 fi
 
 # random color for each host
@@ -25,12 +28,10 @@ if [ ! -f ~/.host_color ]; then
 fi
 
 # docker alias
-source ~/.dockerfunc
+[ -x "$(command -v docker)" ] && source ~/.dockerfunc
 
 #setting up git bash prompt
-if [ -f  /etc/bash_completion ]; then
-	. /etc/bash_completion
-fi
+[ -f  /etc/bash_completion ] && source /etc/bash_completion
 
 # Note: PS1 and umask are already set in /etc/profile. You should not
 # need this unless you want different defaults for root.
@@ -125,7 +126,13 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias clean='sudo apt-get autoclean && sudo apt-get autoremove && sudo apt-get clean'
 
+# ssh alias
 alias lisbeth="ssh edznux@edznux.fr"
+alias raspi="ssh pi@raspberrypi.home"
+
+# trello-cli alias
+alias todo="trello show-cards -b general -l TODO"
+alias todo-dev="trello show-cards -b general -l 'TODO dev'"
 
 # Set coloration capabilities for term
 export TERM='xterm-256color'
@@ -191,27 +198,31 @@ man() {
 		man "$@"
 }
 
-# MODIFY PATH
+# NODE PATH
 export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
 
 # SET ENV VAR
 export EDITOR='vim'
 
-# PATH for Golang
+# PATH FOR GOLANG
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+# virtualenv....
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
 
 # PATH for Rust
 export PATH=$PATH:$HOME/.cargo/bin/
 
 # source tools
-source /usr/local/bin/z/z.sh
+[ -f ~/install/z/z.sh ] && source ~/install/z/z.sh
 
 # added by travis gem
-[ -f /home/edznux/.travis/travis.sh ] && source /home/edznux/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-source ~/.local/bin/virtualenvwrapper.sh
+[ -f ~/.local/bin/virtualenvwrapper.sh ] && source ~/.local/bin/virtualenvwrapper.sh
 
 export GPG_TTY=$(tty)
