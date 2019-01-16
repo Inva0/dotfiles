@@ -196,7 +196,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 bindsym XF86KbdBrightnessUp exec kbacklight up
 bindsym XF86KbdBrightnessDown exec kbacklight down 
 
-bindsym $mod+Ctrl+9 exec "i3-msg 'workspace 9; exec /usr/bin/slack; exec /snap/bin/discord'"
+bindsym $mod+Ctrl+9 exec "i3-msg 'workspace 9; exec slack; exec discord'"
 
 bindsym $mod+t floating toggle
 # enable tap to clic
