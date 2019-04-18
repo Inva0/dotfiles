@@ -3,7 +3,7 @@
 [user]
 	email = edznux@gmail.com
 	name = Edznux
-	signingkey = 12E2546C25DD9C3D
+	signingkey = C79AB714355C98DBD725BE7C12E2546C25DD9C3D
 [alias]
     undo = reset --soft HEAD~
     redo = commit -a -c ORIG_HEAD
@@ -14,3 +14,5 @@
         quotepath = false
 [push]
 	default = current
+[commit]
+	gpgSign = true
