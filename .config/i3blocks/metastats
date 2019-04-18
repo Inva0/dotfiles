@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+isUp=`systemctl is-active metastats.service`
+
+if [[ ${isUp} == 'active' ]]; then
+	echo '<span foreground="#00DD00">ON</span>'
+else 
+	echo '<span foreground="#FF0000">OFF</span>'
+fi
+
