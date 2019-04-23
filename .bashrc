@@ -216,10 +216,15 @@ export PROJECT_HOME=$HOME/Devel
 export PATH=$PATH:$HOME/.cargo/bin/
 
 # source tools
+
+## z "jump cd" script.
 [ -f ~/install/z/z.sh ] && source ~/install/z/z.sh
 
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
+# All my custom dockerfiles and alias
+[ -d ~/dockerfiles ] && source ~/dockerfiles/source-all.sh
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
