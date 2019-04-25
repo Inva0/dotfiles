@@ -176,7 +176,8 @@ fi
 function mkcd(){
     mkdir -p -- "$1" && cd -P -- "$1"
 }
-
+# shows stats of an email on a git repository.
+# $1 = email
 function git-work(){
 	EMAIL=$1
 	git log --shortstat --author $EMAIL | \
@@ -184,6 +185,21 @@ function git-work(){
 	awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "\nfile :", files, "\ninserted : ", inserted, "deleted", deleted}'Ressource
 }
 
+# shows the top N biggest file of a directory.
+# Default dir = /
+# Default count = 50
+function biggestfiles() {
+	dir=$1
+	count=$2
+	if [ -z "$dir" ]; then
+		dir="/"
+	fi
+	if [ -z "$count" ]; then
+		count="50"
+	fi
+	echo "Searching $count biggest file from $dir"
+	\du -a $dir | sort -n -r | head -n $count
+}
 # Add color to man pages
 # thanks to https://github.com/jessfraz/dotfiles/blob/master/.functions
 man() {
