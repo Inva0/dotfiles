@@ -120,7 +120,7 @@ alias df='df -kTh'
 alias bashrc='. ~/.bashrc'
 
 #Public ip adress
-alias myip="curl http://ipecho.net/plain; echo"
+alias myip="curl https://ipecho.net/plain; echo"
 
 #apt aliases
 alias update='sudo apt-get update && sudo apt-get upgrade'
