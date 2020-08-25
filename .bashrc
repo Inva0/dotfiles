@@ -1,4 +1,14 @@
-cd
+#MODIFY PATH
+export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
+#path variables for go
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=~/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+if [ -z "$PS1" ]; then
+   return
+fi
 
 date=$(date)
 load=$(awk '{print $1}' < /proc/loadavg)
@@ -18,9 +28,6 @@ case $(hostname) in
 	;;
 "Bebe")
 	machineColor="0;35"
-	;;
-"tor-relay")
-	machineColor="0;31"
 	;;
 "common")
 	machineColor="1;31"
@@ -58,8 +65,8 @@ fi
 
 #PS1='\u@\h:\w$(__git_ps1) \$ '
 
-__git_ps1 () 
-{ 
+__git_ps1 ()
+{
     local b="$(git symbolic-ref HEAD 2>/dev/null)";
     local bname="${b##refs/heads/}";
     case $bname in
@@ -78,16 +85,43 @@ __git_ps1 ()
     fi
 }
 
-PS1="\t \[\e[38;5;253m\]\u\[\e[38;5;245m\]@\[\e[""$machineColor""m\]\h\[\e[m\]:\[\e[00;36m\][\w]\[\e[38;5;245m\]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
+all_colors ()
+{
+	echo -e "\033[1;30mGRAY"
 
-# uses hub (https://hub.github.com to make git more github friendly
-eval "$(hub alias -s)"
+	echo -e "\033[0;31mRED"
+	echo -e "\033[1;31mLIGHT_RED"
+
+	echo -e "\033[0;32mGREEN"
+	echo -e "\033[1;32mLIGHT_GREEN"
+
+	echo -e "\033[0;33mYELLOW"
+	echo -e "\033[1;33mLIGHT_YELLOW"
+
+	echo -e "\033[0;34mBLUE"
+	echo -e "\033[1;34mLIGHT_BLUE"
+
+	echo -e "\033[0;35mPURPLE"
+	echo -e "\033[1;35mLIGHT_PURPLE"
+
+	echo -e "\033[0;36mCYAN"
+	echo -e "\033[1;36mLIGHT_CYAN"
+
+	echo -e "\033[0;37mLIGHT_GRAY"
+	echo -e "\033[1;37mWHITE"
+}
+
+hostToBin ()
+{
+		
+}
+
+PS1="\t \[\e[38;5;253m\]\u\[\e[38;5;245m\]@\[\e[""$machineColor""m\]\h\[\e[m\]:\[\e[00;36m\][\w]\[\e[38;5;245m\]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 # export LS_OPTIONS='--color=auto'
 # eval "`dircolors`"
 eval "`dircolors -b ~/.dir_colors`"
-
 
 # history control !
 export HISTCONTROL=ignoreboth:erasedups
@@ -141,9 +175,6 @@ alias df='df -kTh'
 #Reload BashRc
 alias bashrc='. ~/.bashrc'
 
-#Public ip adress
-alias myip="curl http://ipecho.net/plain; echo"
-
 #apt aliases
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias clean='sudo apt-get autoclean && sudo apt-get autoremove && sudo apt-get clean'
@@ -154,10 +185,19 @@ alias tmux='tmux -u'
 #using ip with colors
 alias ip='ip -c'
 
-#Weather in terminal (useless but pretty)
+# Weather in terminal (useless but pretty)
+# Options described there: http://wttr.in/:help
 weather() {
-  curl "http://wttr.in/${1-}";
+  curl "http://wttr.in/${1-}?F2q";
 }
+
+lastWeatherDay=$(date -d "@$(stat -c %X ~/.lastweather)" +'%Y-%m-%d')
+nowDay=$(date +'%Y-%m-%d')
+
+if [ $lastWeatherDay != $nowDay ]; then
+        weather
+				touch ~/.lastweather
+fi
 
 #Extracting function
 function extract {
@@ -193,14 +233,6 @@ fi
 }
 
 export EDITOR='vim'
-
-#MODIFY PATH
-export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
-#path variables for go
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=~/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
 
 #struct de gestion de clés
 function sshagent_findsockets {
