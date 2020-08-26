@@ -7,6 +7,8 @@ if [ -z "$PS1" ]; then
    return
 fi
 
+cd
+
 date=$(date)
 load=$(awk '{print $1}' < /proc/loadavg)
 root_usage=$(df -h / | awk '/\// {print $(NF-1)}')
