@@ -40,6 +40,10 @@ if [ ! -f ~/.git-prompt.sh ]; then
 	echo
 fi
 
+if [ ! -f ~/.lastweather ]; then
+	touch -t '197001010000' ~/.lastweather
+fi
+
 echo "You can now load your new config by sourcing the bashfile:"
 echo
 echo ". ~/.bashrc"
