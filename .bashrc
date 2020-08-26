@@ -1,10 +1,7 @@
-#MODIFY PATH
-export PATH=$PATH:/opt/node-v5.1.1-linux-x64/bin/
-#path variables for go
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=~/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
+# Add global composer install to path
+if [ -x "$(command -v composer)" ]; then
+	export PATH=$PATH:"$(composer global config home 2>/dev/null)""/vendor/bin/"
+fi
 
 if [ -z "$PS1" ]; then
    return
@@ -109,11 +106,6 @@ all_colors ()
 
 	echo -e "\033[0;37mLIGHT_GRAY"
 	echo -e "\033[1;37mWHITE"
-}
-
-hostToBin ()
-{
-		
 }
 
 PS1="\t \[\e[38;5;253m\]\u\[\e[38;5;245m\]@\[\e[""$machineColor""m\]\h\[\e[m\]:\[\e[00;36m\][\w]\[\e[38;5;245m\]\$(__git_ps1)\[\e[0m\]\[\e[00;37m\]\[\e[0m\]\$\[\e[m\] \[\e[0;37m\]"
@@ -303,3 +295,13 @@ function sshagent_init {
 }
 
 alias sagent="sshagent_init"
+
+          # Adding wsl-open as a browser for Bash for Windows
+          if [[ $(uname -r) =~ (m|M)icrosoft ]]; then
+            if [[ -z $BROWSER ]]; then
+              export BROWSER=wsl-open
+            else
+              export BROWSER=$BROWSER:wsl-open
+            fi
+          fi
+          

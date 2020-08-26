@@ -7,7 +7,9 @@
     undo = git reset --soft HEAD~
 
 [core]
-        quotepath = false
+	quotepath = false
+	excludesfile = ~/.gitignore
+
 [push]
 	default = matching
 [credential]
